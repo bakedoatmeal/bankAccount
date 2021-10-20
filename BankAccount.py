@@ -7,15 +7,28 @@ class BankAccount:
     def deposit(self, amount):
         new_balance = self.balance + amount
         self.balance = new_balance
-    
-    def withdraw(self):
-        pass
+        print(f"Amount deposited: ${amount} new balance: ${self.balance}")
+
+    def withdraw(self, amount):
+        if amount > self.balance: 
+            print("Insufficient funds")
+            new_balance = self.balance - amount
+            self.balance = new_balance
+            return 
+            
+        new_balance = self.balance - amount
+        self.balance = new_balance
+        print(f"Amount withdrawn: ${amount} new balance: ${self.balance}")
 
     def get_balance(self):
-        pass
+        print(f"The current account balance is ${self.balance}")
+        return self.balance
 
     def add_interest(self):
         pass
 
     def print_statement(self):
         pass
+
+mitchell_account = BankAccount("Mitchell", 3141592, 0)
+mitchell_account.deposit(400000)
