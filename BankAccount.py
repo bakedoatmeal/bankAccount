@@ -4,6 +4,7 @@ class BankAccount:
         self.account_number = account_number
         self.balance = balance
         self.account_type = account_type
+        bank.append(self)
 
     def deposit(self, amount):
         new_balance = self.balance + amount
@@ -27,7 +28,11 @@ class BankAccount:
         return self.balance
 
     def add_interest(self):
-        new_balance = self.balance * 1 - self.balance * 0.00083
+        if self.account_type == "checking":
+            interest_rate = 0.00083
+        else:
+            interest_rate = 0.0001
+        new_balance = self.balance * 1 - self.balance * interest_rate
         self.balance = new_balance
         print(f"Interest has been charged! New balance: {self.format_print_balance()}")
 
@@ -42,10 +47,24 @@ class BankAccount:
         balance_string = "{:.2f}".format(balance_string)
         return balance_string
 
-mitchell_account = BankAccount("Mitchell", 3141592, 0)
+bank = []
+
+mitchell_account = BankAccount("Mitchell", 3141592, 0, "savings")
 mitchell_account.deposit(400000)
 mitchell_account.print_statement()
 mitchell_account.add_interest()
 mitchell_account.print_statement()
 mitchell_account.withdraw(150)
 mitchell_account.print_statement()
+
+jane_account = BankAccount("Jane", 3141593, 2000, "checking")
+ara_account = BankAccount("Ara", 3141594, 2000, "savings")
+ara_account.add_interest()
+jane_account.add_interest()
+jane_account.print_statement()
+ara_account.print_statement()
+
+for account in bank: 
+    account.add_interest()
+    account.print_statement()
+
