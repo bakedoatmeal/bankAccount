@@ -5,6 +5,7 @@ class BankAccount:
         self.balance = balance
         self.account_type = account_type
         bank.append(self)
+        print(f"Account created for {self.full_name}!")
 
     def deposit(self, amount):
         new_balance = self.balance + amount
@@ -68,3 +69,34 @@ for account in bank:
     account.add_interest()
     account.print_statement()
 
+def create_account():
+    print("Creating Account!")
+    account_name = input("Please enter the name of the account holder: ")
+    account_number = input("Please choose an account number: ")
+    account_type = input("Please choose an account type - 'checking' or 'savings': ")
+    BankAccount(account_name, account_number, 0, account_type)
+
+bank_open = True
+while bank_open: 
+    select_function = input("Please choose 'c' to create an account, 's' to create a statement, 'd' to make a deposit, 'w' to withdraw, and 'q' to quit: ")
+    if select_function == 'q':
+        bank_open = False
+    elif select_function == 'c':
+        create_account()
+    elif select_function == 's':
+        account_number = int(input("Please enter the account number you'd like a statement for: "))
+        for account in bank:
+            if account.account_number == account_number: 
+                account.print_statement()
+    elif select_function == 'd':
+        account_number = int(input("Please enter the account number you'd like to deposit to: "))
+        deposit_amount = int(input("Deposit amount: "))
+        for account in bank: 
+            if account.account_number == account_number:
+                account.deposit(deposit_amount)
+    elif select_function == 'w':
+        account_number = int(input("Please enter the account number you'd like to withdraw from: "))
+        deposit_amount = int(input("Withdrawal amount: "))
+        for account in bank: 
+            if account.account_number == account_number:
+                account.withdraw(deposit_amount)

@@ -1,4 +1,4 @@
-# BankAccount README.md
+# BankAccount
 
 Python program for creating and managing bank accounts. 
 
