@@ -27,9 +27,6 @@ class Bank:
             if account.account_number == account_number:
                 account.withdraw(deposit_amount)
 
-    def transfer(self):
-        pass
-
     #take user input to print an account statement
     def statement(self):
         account_number = int(input("Please enter the account number you'd like a statement for: "))
